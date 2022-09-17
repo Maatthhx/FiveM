@@ -1,0 +1,24 @@
+local qtdAmmunition = 250
+local itemlist = {
+    ["WEAPON_PISTOL_MK2"] = { arg = "fiveseven" },
+    ["WEAPON_ASSAULTSMG"] = { arg = "smg" },
+    ["WEAPON_RAYPISTOL"] = { arg = "raio" },
+    ["WEAPON_ASSAULTRIFLE"] = { arg = "ak" },
+    ["WEAPON_PROXMINE"] = { arg = "mina" },
+    ["WEAPON_MINIGUN"] = { arg = "minigun" },
+    ["WEAPON_RPG"] = { arg = "rpg" }
+}
+
+RegisterCommand('arma',function(source,args,rawCommand)
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id,"staff-weapon.permissao") then
+        if args[1] then
+            for k,v in pairs(itemlist) do
+                if v.arg == args[1] then
+                    result = k
+                    vRPclient.giveWeapons(source,{[result] = { ammo = qtdAmmunition }})
+                end
+            end
+        end
+    end
+end)
